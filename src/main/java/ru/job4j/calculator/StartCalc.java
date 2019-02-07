@@ -10,7 +10,7 @@ public class StartCalc {
     private final InteractCalculator calculator;
 
     public StartCalc(IO ioSerivce) {
-        this.calculator = new InteractCalculator(ioSerivce);
+        this.calculator = new EngineerCalculator(ioSerivce);
     }
 
     public void start() {
