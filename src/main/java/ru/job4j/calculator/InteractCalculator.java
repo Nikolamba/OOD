@@ -2,28 +2,32 @@ package ru.job4j.calculator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.BiFunction;
+import java.util.function.BiConsumer;
 
 /**
  * @author Nikolay Meleshkin (sol.of.f@mail.ru)
  * @version 0.1
  */
-public class UserActions {
+public class InteractCalculator {
 
-    private final List<UserAction> actions;
-    private final InteractCalc calc;
-    private final IO io;
+    protected final List<UserAction> actions;
+    protected final Calculator calc;
+    protected final IO io;
+    protected UserAction lastAction;
+    protected double lastCalculation;
 
-    public UserActions(IO io) {
-        this.calc = new InteractCalc();
-        this.actions = new ArrayList<>();
+    public InteractCalculator(IO io) {
         this.io = io;
+        this.calc = new Calculator();
+        this.actions = new ArrayList<>();
+        this.lastAction = null;
         this.actions.add(new Add(0, "Add of 2 numbers"));
         this.actions.add(new Substract(1, "Substraction of 2 numbers"));
         this.actions.add(new Multiple(2, "Multiplication of 2 numbers"));
         this.actions.add(new Div(3, "Division of 2 numbers"));
         this.actions.add(new LastOperation(4, "Use last operation"));
         this.actions.add(new LastCalculation(5, "Show last calculation"));
+
     }
 
     public void executeAction(int num) {
@@ -50,10 +54,12 @@ public class UserActions {
         io.sendString(menu.toString());
     }
 
-    private void exec(BiFunction<Double, Double, Double> function) {
+    private void exec(BiConsumer<Double, Double> function) {
         io.sendString("Enter 2 numbers separated by a space");
         List<Double> numbers = io.getNumbers(2);
-        io.sendString("Result: " + Double.toString(function.apply(numbers.get(0), numbers.get(1))));
+        function.accept(numbers.get(0), numbers.get(1));
+        this.lastCalculation = calc.getResult();
+        io.sendString("Result: " + Double.toString(calc.getResult()));
     }
 
     private class Add implements UserAction {
@@ -73,6 +79,7 @@ public class UserActions {
 
         @Override
         public void execute() {
+            lastAction = this;
             exec(calc::add);
         }
 
@@ -99,6 +106,7 @@ public class UserActions {
 
         @Override
         public void execute() {
+            lastAction = this;
             exec(calc::substract);
         }
 
@@ -125,6 +133,7 @@ public class UserActions {
 
         @Override
         public void execute() {
+            lastAction = this;
             exec(calc::multiple);
         }
 
@@ -151,6 +160,7 @@ public class UserActions {
 
         @Override
         public void execute() {
+            lastAction = this;
             exec(calc::div);
         }
 
@@ -177,11 +187,11 @@ public class UserActions {
 
         @Override
         public void execute() {
-            if (calc.getLastOperation() == null) {
+            if (lastAction == null) {
                 io.sendString("No last operation");
                 return;
             }
-            exec(calc::useLastOperation);
+            executeAction(lastAction.getKey());
         }
 
         @Override
@@ -207,7 +217,7 @@ public class UserActions {
 
         @Override
         public void execute() {
-            io.sendString("Result: " + Double.toString(calc.getLastCalculation()));
+            io.sendString("Result: " + Double.toString(lastCalculation));
         }
 
         @Override

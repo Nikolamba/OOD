@@ -7,21 +7,21 @@ import java.util.Scanner;
  * @version 0.1
  */
 public class StartCalc {
-    private final UserActions actions;
+    private final InteractCalculator calculator;
 
     public StartCalc(IO ioSerivce) {
-        this.actions = new UserActions(ioSerivce);
+        this.calculator = new InteractCalculator(ioSerivce);
     }
 
     public void start() {
         Scanner scanner = new Scanner(System.in);
         String line = "";
         while (!line.equalsIgnoreCase("exit")) {
-            this.actions.showMenu();
+            this.calculator.showMenu();
             if (scanner.hasNextInt()) {
                 int sign = scanner.nextInt();
-                if (0 <= sign && sign <= this.actions.getMenuSize()) {
-                    this.actions.executeAction(sign);
+                if (0 <= sign && sign <= this.calculator.getMenuSize()) {
+                    this.calculator.executeAction(sign);
                 } else {
                     System.out.println("Enter available menu item");
                 }
