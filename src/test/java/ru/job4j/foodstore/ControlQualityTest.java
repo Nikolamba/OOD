@@ -11,13 +11,13 @@ import static org.junit.Assert.*;
 
 public class ControlQualityTest {
 
-    private ControlQuality control = new ControlQuality();
+    private ControlQuality control;
     private final Calendar calendar = new GregorianCalendar();
 
     @Before
     public void setUp() {
         calendar.set(2019, Calendar.FEBRUARY, 8);
-        control.setCalendar(calendar);
+        control = new ControlQuality(calendar);
     }
 
     @Test

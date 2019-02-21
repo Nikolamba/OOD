@@ -1,95 +1,58 @@
 package ru.job4j.foodstore;
 
+import ru.job4j.foodstore.chain.*;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class ControlQuality {
-    protected Store warehouse;
-    protected Store shop;
-    protected Store trash;
-    protected Calendar calendar;
+    private final Chain c1;
+    private final Shop shop;
+    private final Warehouse warehouse;
+    private final Trash trash;
+    private final Calendar calendar;
 
     public ControlQuality() {
-        this.warehouse = new Warehouse(2);
-        this.shop = new Shop(2);
+        this.shop = new Shop(5);
+        this.warehouse = new Warehouse(10);
         this.trash = new Trash();
-        calendar = new GregorianCalendar();
+        this.calendar = new GregorianCalendar();
+        this.c1 = new WarehouseChain(warehouse);
+        Chain c2 = new ShopChain(shop);
+        Chain c3 = new ShopChainWithDiscount(shop, 20);
+        Chain c4 = new TrashChain(trash);
+        c1.setNextChain(c2);
+        c2.setNextChain(c3);
+        c3.setNextChain(c4);
+    }
+
+    public ControlQuality(Calendar calendar) {
+        this();
+        Chain curChain = c1;
+        do {
+            curChain.setCalendar(calendar);
+            curChain = curChain.getNextChain();
+        } while (curChain != null);
     }
 
     public void execute(Food food) {
-        Store currentStore;
-        int shelfLife = shelfLife(food);
-        if (shelfLife < 0 || shelfLife > 100) {
-            throw new IllegalStateException("error of the current date or date in the product");
-        }
-        if (shelfLife < 25) {
-            currentStore = warehouse;
-        } else if (shelfLife < 75) {
-            currentStore = shop;
-        } else if (shelfLife < 100) {
-            food.setDiscount(20);
-            currentStore = shop;
-        } else {
-            currentStore = trash;
-        }
-        currentStore.add(food);
+        this.c1.process(food);
     }
 
-    public int shelfLife(Food food) {
-        long shelfLife = food.getExpareDate().getTime() - food.getCreateDate().getTime();
-        long after = calendar.getTime().getTime() - food.getCreateDate().getTime();
-        System.out.println((int) ((after * 100) / shelfLife));
-        return  (int) ((after * 100) / shelfLife);
-    }
-
-    public Store getWarehouse() {
-        return warehouse;
-    }
-
-    public Store getShop() {
+    public Shop getShop() {
         return shop;
     }
 
-    public Store getTrash() {
+    public Warehouse getWarehouse() {
+        return warehouse;
+    }
+
+    public Trash getTrash() {
         return trash;
     }
 
-    public void setCalendar(Calendar calendar) {
-        this.calendar = calendar;
-    }
-
-    public void setWarehouse(Store warehouse) {
-        this.warehouse = warehouse;
-    }
-
-    public void setShop(Store shop) {
-        this.shop = shop;
-    }
-
-    public void setTrash(Store trash) {
-        this.trash = trash;
-    }
-
-    public static void main(String[] args) {
-        ControlQuality control = new ControlQuality();
-        Date expireDate = new GregorianCalendar(2019, GregorianCalendar.MARCH, 15).getTime();
-        Date createDate = new GregorianCalendar(2019, GregorianCalendar.FEBRUARY, 1).getTime();
-        Food food1 = new Food("Milk", expireDate, createDate, 44);
-
-        control.execute(food1);
-
-        System.out.println("WAREHOUSE");
-        for (Food food : control.warehouse.getHeap()) {
-            System.out.println(food);
-        }
-        System.out.println("SHOP");
-        for (Food food : control.shop.getHeap()) {
-            System.out.println(food);
-        }
-        System.out.println("TRASH");
-        for (Food food : control.trash.getHeap()) {
-            System.out.println(food);
-        }
+    public Calendar getCalendar() {
+        return calendar;
     }
 }
