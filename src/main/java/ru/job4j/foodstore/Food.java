@@ -2,12 +2,12 @@ package ru.job4j.foodstore;
 
 import java.util.Date;
 
-public class Food {
-    private String name;
-    private Date expareDate;
-    private Date createDate;
-    private double price;
-    private int discount;
+public class Food implements FoodInterface {
+    protected String name;
+    protected Date expareDate;
+    protected Date createDate;
+    protected double price;
+    protected int discount;
 
     public Food(String name, Date expareDate, Date createDate, double price) {
         this.name = name;
@@ -16,22 +16,27 @@ public class Food {
         this.price = price;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public Date getExpareDate() {
         return expareDate;
     }
 
+    @Override
     public Date getCreateDate() {
         return createDate;
     }
 
+    @Override
     public double getPrice() {
         return price;
     }
 
+    @Override
     public int getDiscount() {
         return discount;
     }

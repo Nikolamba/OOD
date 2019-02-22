@@ -1,15 +1,15 @@
 package ru.job4j.foodstore.chain;
 
 import ru.job4j.foodstore.Food;
-import ru.job4j.foodstore.Warehouse;
+import ru.job4j.foodstore.stores.Warehouse;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class WarehouseChain implements Chain {
-    private final Warehouse warehouse;
-    private Chain next;
-    private Calendar calendar;
+    protected final Warehouse warehouse;
+    protected Chain next;
+    protected Calendar calendar;
 
     public WarehouseChain(Warehouse warehouse) {
         this.warehouse = warehouse;

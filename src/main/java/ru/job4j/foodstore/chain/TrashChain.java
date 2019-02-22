@@ -1,15 +1,15 @@
 package ru.job4j.foodstore.chain;
 
 import ru.job4j.foodstore.Food;
-import ru.job4j.foodstore.Trash;
+import ru.job4j.foodstore.stores.Trash;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class TrashChain implements Chain {
-    private final Trash trash;
-    private Chain next;
-    private Calendar calendar;
+    protected final Trash trash;
+    protected Chain next;
+    protected Calendar calendar;
 
     public TrashChain(Trash trash) {
         this.trash = trash;

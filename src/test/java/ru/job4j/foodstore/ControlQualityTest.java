@@ -54,4 +54,37 @@ public class ControlQualityTest {
         assertTrue(control.getWarehouse().getHeap().isEmpty());
         assertTrue(control.getTrash().getHeap().isEmpty());
     }
+
+//    @Test
+//    public void test4() {
+//        Date expireDate = new GregorianCalendar(2019, GregorianCalendar.MARCH, 15).getTime();
+//        Date createDate = new GregorianCalendar(2019, GregorianCalendar.FEBRUARY, 1).getTime();
+//        Food food = new Food("Milk", expireDate, createDate, 0);
+//        for (int i = 0; i < 5; i++) {
+//            control.execute(food);
+//        }
+//        assertEquals(3, control.getWarehouse().getHeap().size());
+//        assertEquals(2, control.getWarehouse2().getHeap().size());
+//    }
+//
+//    @Test
+//    public void test5() {
+//        Date expireDate = new GregorianCalendar(2019, GregorianCalendar.FEBRUARY, 7).getTime();
+//        Date createDate = new GregorianCalendar(2019, GregorianCalendar.FEBRUARY, 1).getTime();
+//        Food food = new Food("Milk", expireDate, createDate, 0);
+//        food.setCanReproduct(true);
+//        control.execute(food);
+//        assertEquals(1, control.getReproduct().getHeap().size());
+//    }
+//
+//    @Test
+//    public void test6() {
+//        Date expireDate = new GregorianCalendar(2019, GregorianCalendar.MARCH, 15).getTime();
+//        Date createDate = new GregorianCalendar(2019, GregorianCalendar.FEBRUARY, 1).getTime();
+//        Food food = new Food("Milk", expireDate, createDate, 0);
+//        food.setVegetable(true);
+//        control.execute(food);
+//        WarehouseWithColdStorage coldStorage = (WarehouseWithColdStorage) control.getWarehouse();
+//        assertEquals(1, coldStorage.getColdHeap().size());
+//    }
 }

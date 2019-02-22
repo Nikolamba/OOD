@@ -1,7 +1,7 @@
 package ru.job4j.foodstore.chain;
 
 import ru.job4j.foodstore.Food;
-import ru.job4j.foodstore.Shop;
+import ru.job4j.foodstore.stores.Shop;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -24,6 +24,9 @@ public class ShopChain implements Chain {
     @Override
     public void process(Food food) {
         if (shelfLife(food, calendar) >= 25 && shelfLife(food, calendar) <= 75) {
+            this.shop.add(food);
+        } else if (shelfLife(food, calendar) > 75 && shelfLife(food, calendar) < 100) {
+            food.setDiscount(20);
             this.shop.add(food);
         } else {
             this.next.process(food);
