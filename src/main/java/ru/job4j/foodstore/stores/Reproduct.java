@@ -2,15 +2,15 @@ package ru.job4j.foodstore.stores;
 
 import ru.job4j.foodstore.Food;
 
-public class Trash extends AbstractStore {
+public class Reproduct extends AbstractStore {
     protected int maxSize;
 
-    public Trash() {
-        this.maxSize = Integer.MAX_VALUE;
+    public Reproduct(int maxSize) {
+        this.maxSize = maxSize;
     }
 
-    public Trash(int maxSize) {
-        this.maxSize = maxSize;
+    public Reproduct() {
+        this.maxSize = Integer.MAX_VALUE;
     }
 
     @Override

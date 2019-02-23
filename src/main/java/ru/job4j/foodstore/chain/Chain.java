@@ -13,7 +13,6 @@ public interface Chain {
     default int shelfLife(Food food, Calendar calendar) {
         long shelfLife = food.getExpareDate().getTime() - food.getCreateDate().getTime();
         long after = calendar.getTime().getTime() - food.getCreateDate().getTime();
-        System.out.println((int) ((after * 100) / shelfLife));
         return (int) ((after * 100) / shelfLife);
     }
 }

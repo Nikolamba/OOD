@@ -8,4 +8,8 @@ public interface FoodInterface {
     Date getCreateDate();
     double getPrice();
     int getDiscount();
+    boolean canReproduct();
+    void setReproductStatus(boolean status);
+    boolean isVegetable();
+    void setVegetableSign(boolean sign);
 }

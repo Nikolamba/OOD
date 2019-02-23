@@ -9,10 +9,10 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class ControlQuality {
-    protected final Chain c1;
+    protected Chain c1;
     protected final Shop shop;
-    protected final Warehouse warehouse;
-    protected final Trash trash;
+    protected Warehouse warehouse;
+    protected Trash trash;
     protected final Calendar calendar;
 
     public ControlQuality() {

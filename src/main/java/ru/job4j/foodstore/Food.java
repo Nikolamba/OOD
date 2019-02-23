@@ -8,6 +8,8 @@ public class Food implements FoodInterface {
     protected Date createDate;
     protected double price;
     protected int discount;
+    protected boolean canReproduct;
+    protected boolean isVegetable;
 
     public Food(String name, Date expareDate, Date createDate, double price) {
         this.name = name;
@@ -39,6 +41,26 @@ public class Food implements FoodInterface {
     @Override
     public int getDiscount() {
         return discount;
+    }
+
+    @Override
+    public boolean canReproduct() {
+        return this.canReproduct;
+    }
+
+    @Override
+    public void setReproductStatus(boolean status) {
+        this.canReproduct = status;
+    }
+
+    @Override
+    public boolean isVegetable() {
+        return this.isVegetable;
+    }
+
+    @Override
+    public void setVegetableSign(boolean sign) {
+        this.isVegetable = sign;
     }
 
     public void setName(String name) {
