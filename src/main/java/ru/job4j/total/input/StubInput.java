@@ -5,6 +5,11 @@ import javafx.util.Pair;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Класс, реализующий автоматический ввод
+ * @author Nikolay Meleshkin (sol.of.f@mail.ru)
+ * @version 0.1
+ */
 public class StubInput implements Input {
 
     private Random random;

@@ -3,6 +3,11 @@ package ru.job4j.total.field;
 import ru.job4j.total.figures.Figure;
 import ru.job4j.total.figures.FigureEmpty;
 
+/**
+ * Класс для определения точки на поле
+ * @author Nikolay Meleshkin (sol.of.f@mail.ru)
+ * @version 0.1
+ */
 public class Point {
     private final int x;
     private final int y;

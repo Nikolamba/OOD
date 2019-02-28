@@ -6,6 +6,11 @@ import ru.job4j.total.figures.FigureEmpty;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Класс, реализующий поведение поля для игры
+ * @author Nikolay Meleshkin (sol.of.f@mail.ru)
+ * @version 0.1
+ */
 public class FieldImpl implements Field {
 
     private final int size;

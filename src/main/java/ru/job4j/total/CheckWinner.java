@@ -4,6 +4,11 @@ import ru.job4j.total.field.Field;
 import ru.job4j.total.figures.Figure;
 import ru.job4j.total.user.User;
 
+/**
+ * A class that check if there is a win.
+ * @author Nikolay Meleshkin (sol.of.f@mail.ru)
+ * @version 0.1
+ */
 public class CheckWinner {
 
     private final Field field;

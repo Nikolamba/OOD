@@ -5,6 +5,11 @@ import ru.job4j.total.figures.Figure;
 
 import java.util.List;
 
+/**
+ * Класс, определяющий поведение пользователя
+ * @author Nikolay Meleshkin (sol.of.f@mail.ru)
+ * @version 0.1
+ */
 public interface User {
     Pair<Integer, Integer> getPair(List<Pair<Integer, Integer>> range);
     String getName();

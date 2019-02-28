@@ -6,6 +6,10 @@ import ru.job4j.total.figures.Figure;
 
 import java.util.List;
 
+/**
+ * @author Nikolay Meleshkin (sol.of.f@mail.ru)
+ * @version 0.1
+ */
 public class Player extends AbstractUser {
 
     public Player(String name, Figure figure, Input input) {

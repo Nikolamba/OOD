@@ -12,6 +12,11 @@ import ru.job4j.total.user.CompPlayer;
 import ru.job4j.total.user.Player;
 import ru.job4j.total.user.User;
 
+/**
+ * Класс, запускающий цикл игры
+ * @author Nikolay Meleshkin (sol.of.f@mail.ru)
+ * @version 0.1
+ */
 public class Game {
 
     private final Field field;

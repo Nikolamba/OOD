@@ -5,6 +5,11 @@ import javafx.util.Pair;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ * Класс, реализующий ввод пользователя с консоли
+ * @author Nikolay Meleshkin (sol.of.f@mail.ru)
+ * @version 0.1
+ */
 public class ConsoleInput implements Input {
 
     private final Scanner scanner;

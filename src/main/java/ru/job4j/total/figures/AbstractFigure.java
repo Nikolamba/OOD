@@ -2,6 +2,11 @@ package ru.job4j.total.figures;
 
 import java.util.Objects;
 
+/**
+ * Абстрактный класс, реализующий общее повещение фигуры
+ * @author Nikolay Meleshkin (sol.of.f@mail.ru)
+ * @version 0.1
+ */
 public abstract class AbstractFigure implements Figure {
 
     protected final char sign;

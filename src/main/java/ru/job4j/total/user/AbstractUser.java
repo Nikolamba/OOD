@@ -3,6 +3,11 @@ package ru.job4j.total.user;
 import ru.job4j.total.input.Input;
 import ru.job4j.total.figures.Figure;
 
+/**
+ * Абстрактный класс, реализующий общее поведение пользователя
+ * @author Nikolay Meleshkin (sol.of.f@mail.ru)
+ * @version 0.1
+ */
 public abstract class AbstractUser implements User {
     protected final Input input;
     protected final Figure figure;

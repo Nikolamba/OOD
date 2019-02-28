@@ -2,6 +2,11 @@ package ru.job4j.total;
 
 import ru.job4j.total.user.User;
 
+/**
+ * Класс для реализации последовательности ходов пользователей
+ * @author Nikolay Meleshkin (sol.of.f@mail.ru)
+ * @version 0.1
+ */
 public class Chain {
     private final User user;
     private Chain nextChain;
