@@ -43,7 +43,7 @@ public class CheckWinner {
 
     private boolean checkLeftDiagonal(Figure figure, int x, int y) {
         boolean toleft = true;
-        for (int i = this.vicCondition -1 + x, k = y; i >= x; i--, k++) {
+        for (int i = this.vicCondition - 1 + x, k = y; i >= x; i--, k++) {
             toleft &= (this.field.getFigure(i, k).equals(figure));
         }
         return toleft;
