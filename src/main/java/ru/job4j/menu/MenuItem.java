@@ -7,6 +7,5 @@ package ru.job4j.menu;
 public interface MenuItem {
     String getName();
     MenuItemSubmenu getParent();
-    void setParent(MenuItemSubmenu parent);
     boolean isSubmenu();
 }

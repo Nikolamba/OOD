@@ -10,9 +10,11 @@ public class MenuItemExecutableImpl implements MenuItemExecutable {
     private String name;
     private MenuItemSubmenu parent;
 
-    public MenuItemExecutableImpl(int key, String name) {
+    public MenuItemExecutableImpl(int key, String name, MenuItemSubmenu parent) {
         this.key = key;
         this.name = name;
+        this.parent = parent;
+        this.parent.addChild(this);
     }
 
     @Override
@@ -33,11 +35,6 @@ public class MenuItemExecutableImpl implements MenuItemExecutable {
     @Override
     public MenuItemSubmenu getParent() {
         return this.parent;
-    }
-
-    @Override
-    public void setParent(MenuItemSubmenu parent) {
-        this.parent = parent;
     }
 
     @Override

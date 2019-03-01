@@ -10,20 +10,20 @@ public class MenuBuild {
 
     public static void main(String[] args) {
 
-        MenuItemSubmenuImpl submenu = new MenuItemSubmenuImpl("menu");
-        MenuItemExecutableImpl exMenu1 = new MenuItemExecutableImpl(1, "task 1");
-        MenuItemExecutableImpl exMenu2 = new MenuItemExecutableImpl(2, "task 2");
-        submenu.addChilds(Arrays.asList(exMenu1, exMenu2));
+        MenuItemSubmenu menu = new MenuItemSubmenuImpl("root menu", null);
 
-        MenuItemSubmenuImpl submenu2 = new MenuItemSubmenuImpl("menu");
-        MenuItemExecutableImpl exMenu3 = new MenuItemExecutableImpl(3, "task 3");
-        MenuItemExecutableImpl exMenu4 = new MenuItemExecutableImpl(4, "task 4");
-        submenu2.addChilds(Arrays.asList(exMenu3, exMenu4));
+        MenuItemSubmenuImpl submenu1 = new MenuItemSubmenuImpl("menu 1", menu);
+        new MenuItemExecutableImpl(1, "task 1", submenu1);
+        new MenuItemExecutableImpl(2, "task 2", submenu1);
 
-        MenuItemSubmenuImpl submenu1 = new MenuItemSubmenuImpl("menu");
-        submenu1.addChilds(Arrays.asList(submenu2));
+        MenuItemSubmenuImpl submenu = new MenuItemSubmenuImpl("menu 2", menu);
+        new MenuItemExecutableImpl(3, "task 3", submenu);
+        new MenuItemExecutableImpl(4, "task 4", submenu);
+        MenuItemSubmenuImpl submenu2 = new MenuItemSubmenuImpl("menu 3", submenu);
+        new MenuItemExecutableImpl(5, "task 5", submenu2);
 
-        MenuImpl menu = new MenuImpl(Arrays.asList(submenu, submenu1));
-        System.out.println(menu.toString());
+        //System.out.println(menu.toString());
+        System.out.println(menu.showMenu());
+
     }
 }

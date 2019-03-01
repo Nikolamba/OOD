@@ -8,7 +8,9 @@ import java.util.List;
  */
 public interface MenuItemSubmenu extends MenuItem {
     List<MenuItem> getChilds();
-    void addChilds(List<MenuItem> items);
+    void addChild(MenuItem item);
+    boolean executeItem(int key);
+    String showMenu();
 
     @Override
     default boolean isSubmenu() {
