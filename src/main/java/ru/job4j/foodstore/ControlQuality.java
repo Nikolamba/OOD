@@ -1,55 +1,44 @@
 package ru.job4j.foodstore;
 
-import ru.job4j.foodstore.chain.*;
 import ru.job4j.foodstore.stores.Shop;
+import ru.job4j.foodstore.stores.Store;
 import ru.job4j.foodstore.stores.Trash;
 import ru.job4j.foodstore.stores.Warehouse;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ControlQuality {
-    protected Chain c1;
-    protected final Shop shop;
-    protected Warehouse warehouse;
-    protected Trash trash;
     protected final Calendar calendar;
+    protected final Map<String, Store> stores;
 
     public ControlQuality() {
-        this.shop = new Shop();
-        this.warehouse = new Warehouse();
-        this.trash = new Trash();
         this.calendar = new GregorianCalendar();
-        this.c1 = new WarehouseChain(warehouse);
-        Chain c2 = new ShopChain(shop);
-        Chain c3 = new TrashChain(trash);
-        c1.setNextChain(c2);
-        c2.setNextChain(c3);
+        stores = new HashMap<>();
+        stores.put("Warehouse", new Warehouse());
+        stores.put("Shop", new Shop());
+        stores.put("Trash", new Trash());
     }
 
     public ControlQuality(Calendar calendar) {
         this();
-        Chain curChain = c1;
-        do {
-            curChain.setCalendar(calendar);
-            curChain = curChain.getNextChain();
-        } while (curChain != null);
+        for (Store store : stores.values()) {
+            store.setCalendar(calendar);
+        }
     }
 
     public void execute(Food food) {
-        this.c1.process(food);
+        for (Store store : stores.values()) {
+            if (store.process(food)) {
+                break;
+            }
+        }
     }
 
-    public Shop getShop() {
-        return shop;
-    }
-
-    public Warehouse getWarehouse() {
-        return warehouse;
-    }
-
-    public Trash getTrash() {
-        return trash;
+    public Store getStore(String name) {
+        return this.stores.get(name);
     }
 
     public Calendar getCalendar() {
