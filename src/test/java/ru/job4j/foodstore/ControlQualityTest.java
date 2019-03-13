@@ -33,7 +33,7 @@ public class ControlQualityTest {
 
     @Test
     public void test2() {
-        Date expireDate = new GregorianCalendar(2019, GregorianCalendar.FEBRUARY, 30).getTime();
+        Date expireDate = new GregorianCalendar(2019, GregorianCalendar.FEBRUARY, 25).getTime();
         Date createDate = new GregorianCalendar(2019, GregorianCalendar.FEBRUARY, 1).getTime();
         Food food = new Food("Milk", expireDate, createDate, 0);
         control.execute(food);
