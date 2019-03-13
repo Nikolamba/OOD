@@ -10,7 +10,7 @@ import java.util.Scanner;
  * @author Nikolay Meleshkin (sol.of.f@mail.ru)
  * @version 0.1
  */
-public class ConsoleInput implements Input {
+public class ConsoleInput implements Input, UserInput {
 
     private final Scanner scanner;
 
@@ -25,11 +25,13 @@ public class ConsoleInput implements Input {
             System.out.println("Enter first coordinate");
             while (!scanner.hasNextInt()) {
                 System.out.println("Enter correct number");
+                scanner.next();
             }
             c1 = scanner.nextInt();
             System.out.println("Enter second coordinate");
             while (!scanner.hasNextInt()) {
                 System.out.println("Enter correct number");
+                scanner.next();
             }
             c2 = scanner.nextInt();
             if (!range.contains(new Pair<>(c1, c2))) {
@@ -37,5 +39,24 @@ public class ConsoleInput implements Input {
             }
         }
         return new Pair<>(c1, c2);
+    }
+
+    @Override
+    public int getInt(int min, int max) {
+        boolean interupt = true;
+        int result = 0;
+        while (interupt) {
+            if (scanner.hasNextInt()) {
+                result = scanner.nextInt();
+                if (result >= min && result <= max) {
+                    interupt = false;
+                } else {
+                    System.out.println("Enter a number between " + min + " and " + max);
+                }
+            } else {
+                System.out.println("No number entered. Try again");
+            }
+        }
+        return result;
     }
 }

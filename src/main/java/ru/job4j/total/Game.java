@@ -18,7 +18,6 @@ import ru.job4j.total.user.User;
  * @version 0.1
  */
 public class Game {
-
     private final Field field;
     private Chain userChain;
     private final CheckWinner checkWinner;
@@ -32,20 +31,18 @@ public class Game {
         userChain = new Chain(user1);
         Chain userChain2 = new Chain(user2);
         userChain.setNextChain(userChain2);
+        userChain2.setNextChain(userChain);
 
         Chain curChain = userChain;
         do {
             userStep(curChain.getUser());
             System.out.println(this.field.toString());
             curChain = curChain.getNextChain();
-            if (curChain == null) {
-                curChain = userChain;
-            }
         }  while (!isEndGame(curChain.getUser()));
     }
 
     private boolean isEndGame(User user) {
-        if (checkWinner.checkWin(user)) {
+        if (checkWinner.checkWin(user.getFigure())) {
             System.out.println(user.getName() + " is winner");
             return true;
         }
@@ -63,8 +60,14 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        Field field = new FieldImpl(3);
-        Game game = new Game(field, 3);
+        System.out.println("Enter field size from 3 to 10");
+        int fielsSize = new ConsoleInput().getInt(3, 10);
+        Field field = new FieldImpl(fielsSize);
+
+        System.out.println("Enter victory condition from 3 to 10");
+        int vicCondition = new ConsoleInput().getInt(3, 10);
+        Game game = new Game(field, vicCondition);
+
         System.out.println(field.toString());
         User user = new Player("player 1", new FigureX(), new ConsoleInput());
         User user1 = new CompPlayer("compPlayer", new FigureO(), new StubInput());

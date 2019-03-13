@@ -19,13 +19,13 @@ public class CheckWinner {
         this.vicCondition = vicCondition;
     }
 
-    public boolean checkWin(User user) {
+    public boolean checkWin(Figure figure) {
         int count = this.field.getSize() - vicCondition + 1;
         for (int y = 0; y < count; y++) {
             for (int x = 0; x < count; x++) {
-                if (checkRightDiagonal(user.getFigure(), x, y)
-                        || checkLeftDiagonal(user.getFigure(), x, y)
-                        || checkLines(user.getFigure(), x, y)) {
+                if (checkRightDiagonal(figure, x, y)
+                        || checkLeftDiagonal(figure, x, y)
+                        || checkLines(figure, x, y)) {
                     return true;
                 }
             }
