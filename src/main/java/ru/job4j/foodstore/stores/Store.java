@@ -13,7 +13,7 @@ public interface Store {
     default int shelfLife(Food food, Calendar calendar) {
         long shelfLife = food.getExpareDate().getTime() - food.getCreateDate().getTime();
         long after = calendar.getTime().getTime() - food.getCreateDate().getTime();
-        System.out.println((int)Math.ceil((after * 100) / shelfLife));
-        return (int)Math.ceil((after * 100) / shelfLife);
+        System.out.println((int) Math.ceil((after * 100) / shelfLife));
+        return (int) Math.ceil((after * 100) / shelfLife);
     }
 }
