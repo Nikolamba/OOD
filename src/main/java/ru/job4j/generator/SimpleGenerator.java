@@ -3,34 +3,42 @@ package ru.job4j.generator;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SimpleGenerator implements Template {
 
+    private int useMapCount;
+
     @Override
     public String generate(String template, Map<String, String> map) {
-        if (template == null) {
-            return null;
+        if (template  == null || map == null || map.size() == 0) {
+            throw new IllegalArgumentException();
         }
-        if (map == null || map.size() == 0) {
-            throw new IllegalArgumentException("Missing parameters");
+        StringBuilder sb = new StringBuilder();
+        Pattern pattern = Pattern.compile("\\$\\{[A-zA-Z0-9]+}");
+        Matcher matcher = pattern.matcher(template);
+
+        int start, end = 0;
+        while (matcher.find()) {
+            start = matcher.start();
+            sb.append(template, end, start);
+            sb.append(getValue(matcher.group(), map));
+            end = matcher.end();
         }
-        StringBuilder result = new StringBuilder();
-        Set<String> copyMapKeys = new HashSet<>();
-        while (template.contains("${")) {
-            String[] splitTemplate = template.split("\\$\\{", 2);
-            result.append(splitTemplate[0]);
-            splitTemplate = splitTemplate[1].split("}", 2);
-            if (map.get(splitTemplate[0]) == null) {
-                throw new IllegalArgumentException("no key for parameter " + splitTemplate[0]);
-            }
-            result.append(map.get(splitTemplate[0]));
-            copyMapKeys.add(map.get(splitTemplate[0]));
-            template = splitTemplate[1];
+        if (map.size() > useMapCount) {
+            throw new IllegalArgumentException("Redundant parameters");
         }
-        if (map.size() != copyMapKeys.size()) {
-            throw new IllegalArgumentException("There are redundant parameters");
+        sb.append(template, end, template.length());
+        return sb.toString();
+    }
+
+    private String getValue(String target, Map<String, String> map) {
+        String key = target.substring(2, target.length() - 1);
+        if (!map.containsKey(key)) {
+            throw new IllegalArgumentException("Missing parameter");
         }
-        result.append(template);
-        return result.toString();
+        useMapCount++;
+        return map.get(key);
     }
 }

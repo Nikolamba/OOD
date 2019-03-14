@@ -58,9 +58,9 @@ public class SimpleGeneratorTest {
         simpleGenerator.generate(text, map);
     }
 
-    @Test
-    public void whenTakeNullStringShouldReturnNull() {
+    @Test (expected = IllegalArgumentException.class)
+    public void whenTakeNullStringShouldGetException() {
         map.put("name", "Nikolay");
-        assertNull(simpleGenerator.generate(null, map));
+        simpleGenerator.generate(null, map);
     }
 }
