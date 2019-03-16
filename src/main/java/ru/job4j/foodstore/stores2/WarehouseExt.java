@@ -25,7 +25,7 @@ public class WarehouseExt extends Warehouse {
     @Override
     public boolean process(FoodInterface food) {
         boolean result = false;
-        if (shelfLife(food, calendar) < 25 ) {
+        if (shelfLife(food, calendar) < 25) {
             if (food.isVegetable()) {
                 if (lowTempHeap.size() < lowTempMaxSize) {
                     lowTempHeap.add(food);
