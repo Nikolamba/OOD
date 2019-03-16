@@ -2,12 +2,19 @@ package ru.job4j.foodstore;
 
 import java.util.Date;
 
+/**
+ * Класс, представляющий еду
+ * @author Nikolay Meleshkin (sol.of.f@mail.ru)
+ * @version 0.1
+ */
 public class Food implements FoodInterface {
     protected String name;
     protected Date expareDate;
     protected Date createDate;
     protected double price;
     protected int discount;
+    protected boolean canReproduct;
+    protected boolean isVegetable;
 
     public Food(String name, Date expareDate, Date createDate, double price) {
         this.name = name;
@@ -57,8 +64,27 @@ public class Food implements FoodInterface {
         this.price = price;
     }
 
+    @Override
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    public void setCanReproduct(boolean canReproduct) {
+        this.canReproduct = canReproduct;
+    }
+
+    @Override
+    public boolean canReproduct() {
+        return canReproduct;
+    }
+
+    @Override
+    public boolean isVegetable() {
+        return this.isVegetable;
+    }
+
+    public void setVegetable(boolean isVegetable) {
+        this.isVegetable = isVegetable;
     }
 
     @Override

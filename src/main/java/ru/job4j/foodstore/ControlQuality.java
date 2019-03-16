@@ -5,11 +5,13 @@ import ru.job4j.foodstore.stores.Store;
 import ru.job4j.foodstore.stores.Trash;
 import ru.job4j.foodstore.stores.Warehouse;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
+/**
+ * Класс, распределяющий еду по хранилищам
+ * @author Nikolay Meleshkin (sol.of.f@mail.ru)
+ * @version 0.1
+ */
 public class ControlQuality {
     protected final Calendar calendar;
     protected final Map<String, Store> stores;
@@ -25,11 +27,12 @@ public class ControlQuality {
     public ControlQuality(Calendar calendar) {
         this();
         for (Store store : stores.values()) {
+            System.out.println("Store = " + store.getClass().getSimpleName());
             store.setCalendar(calendar);
         }
     }
 
-    public void execute(Food food) {
+    public void execute(FoodInterface food) {
         for (Store store : stores.values()) {
             if (store.process(food)) {
                 break;
